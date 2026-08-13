@@ -21,10 +21,10 @@ export function HeroSection() {
       {/* No mobile o vídeo é bem mais estreito/alto que os 16:9 nativos do
           arquivo — cobrir a altura toda (como no desktop) cortava as
           laterais e sobrava só a pessoa do centro. "hero-loop-mobile.mp4" é
-          uma composição renderizada à parte (mesma filmagem): uma faixa
-          nítida central em largura cheia com as 3 pessoas, e o resto do
-          quadro preenchido com o próprio vídeo desfocado como fundo — assim
-          cobre 100% do espaço sem cortar ninguém e sem barra sólida.
+          um recorte à parte (mesma filmagem, aprovado pelos donos): só os
+          2 homens, já centralizados no quadro, sem a terceira pessoa —
+          assim um object-cover comum já preenche 100% da tela sem sobrar
+          ninguém pela metade nem precisar de faixa/desfoque de fundo.
           HeroVideo escolhe em JS qual dos dois montar — nunca os dois ao
           mesmo tempo, pra não duplicar o download em conexão fraca. */}
       <Parallax amount={60} className="absolute inset-0 overflow-hidden">
