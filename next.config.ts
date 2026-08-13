@@ -3,6 +3,17 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // O CSS normalmente vai num arquivo .css separado, comprimido com
+  // Brotli — em pelo menos um caso real (celular de cliente em rede
+  // móvel específica), esse arquivo chegava corrompido/vazio, deixando o
+  // site inteiro sem estilo, enquanto o HTML (que não usa Brotli aqui) e
+  // as imagens chegavam normais. Provável proxy de operadora que mexe na
+  // resposta comprimida sem entender o formato. Embutir o CSS direto no
+  // HTML elimina esse arquivo separado — o CSS passa a viajar junto do
+  // HTML, que já comprovadamente chega íntegro nesse cenário.
+  experimental: {
+    inlineCss: true,
+  },
   images: {
     remotePatterns: [
       {
