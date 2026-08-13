@@ -102,4 +102,14 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Fallback em cascata: navegadores/webviews que não reconhecem "svh"
+     (comum em browsers embutidos de apps como WhatsApp) descartam a
+     segunda declaração inteira e ficam com o 100vh — sem isso a seção
+     encolhe pro tamanho do conteúdo e o vídeo de fundo, mesmo cobrindo
+     a caixa certinho, acaba não preenchendo a tela toda. */
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
 }

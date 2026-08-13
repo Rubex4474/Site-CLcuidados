@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-end overflow-hidden bg-foreground"
+      className="min-h-screen-safe relative flex items-end overflow-hidden bg-foreground"
     >
       {/* No mobile o vídeo é bem mais estreito/alto que os 16:9 nativos do
           arquivo — cobrir a altura toda (como no desktop) cortava as
@@ -26,7 +26,7 @@ export function HeroSection() {
           cobre 100% do espaço sem cortar ninguém e sem barra sólida. */}
       <Parallax amount={60} className="absolute inset-0 overflow-hidden">
         <video
-          className="h-full w-full object-cover lg:hidden"
+          className="absolute inset-0 h-full w-full object-cover lg:hidden"
           src="/videos/hero-loop-mobile.mp4"
           autoPlay
           loop
@@ -36,7 +36,7 @@ export function HeroSection() {
           aria-hidden="true"
         />
         <video
-          className="hidden h-full w-full translate-y-24 origin-top scale-110 object-cover object-top lg:block"
+          className="absolute inset-0 hidden h-full w-full translate-y-24 origin-top scale-110 object-cover object-top lg:block"
           src="/videos/hero-loop.mp4"
           autoPlay
           loop
