@@ -19,13 +19,24 @@ export function HeroSection() {
     >
       {/* No mobile o vídeo é bem mais estreito/alto que os 16:9 nativos do
           arquivo — cobrir a altura toda (como no desktop) cortava as
-          laterais e sobrava só a pessoa do centro. Aqui priorizamos a
-          largura (w-full h-auto, centralizado) pra mostrar as 3 pessoas
-          sempre, aceitando a faixa escura acima/abaixo — ela já existia
-          visualmente por causa do gradiente de vinheta. */}
-      <Parallax amount={60} className="absolute inset-0 flex items-center overflow-hidden lg:block">
+          laterais e sobrava só a pessoa do centro. "hero-loop-mobile.mp4" é
+          uma composição renderizada à parte (mesma filmagem): uma faixa
+          nítida central em largura cheia com as 3 pessoas, e o resto do
+          quadro preenchido com o próprio vídeo desfocado como fundo — assim
+          cobre 100% do espaço sem cortar ninguém e sem barra sólida. */}
+      <Parallax amount={60} className="absolute inset-0 overflow-hidden">
         <video
-          className="h-auto w-full lg:h-full lg:w-full lg:translate-y-24 lg:origin-top lg:scale-110 lg:object-cover lg:object-top"
+          className="h-full w-full object-cover lg:hidden"
+          src="/videos/hero-loop-mobile.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
+        <video
+          className="hidden h-full w-full translate-y-24 origin-top scale-110 object-cover object-top lg:block"
           src="/videos/hero-loop.mp4"
           autoPlay
           loop
