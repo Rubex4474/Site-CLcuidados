@@ -1,26 +1,105 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Identidade real da CL Cuidados (case de rebranding, ago/2026) —
+       valores extraídos por amostragem de pixel do arquivo de logo oficial. */
+
+    /* Branco predominante */
+    --background: 0 0% 100%;
+    --foreground: 197 84% 13%;
+
+    /* Branco com leve matiz teal, usado para alternar seções */
+    --surface: 174 20% 97.3%;
+
+    /* Azul marinho da marca (#1C4478) — CTAs primários, links, ícones */
+    --primary: 214 62% 29%;
+    /* Tinta quase-preta da marca (#052C3B) — hover/active do navy */
+    --primary-deep: 197 84% 13%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Mesma tinta quase-preta — seções escuras full-bleed, CTA final */
+    --petrol: 197 84% 13%;
+    /* Wash claro do teal da marca (#66CEC3), para chips/backgrounds tintados */
+    --petrol-tint: 174 45% 94%;
+    --petrol-foreground: 0 0% 100%;
+
+    /* Cinza claro com leve matiz teal — cards e backgrounds secundários */
+    --secondary: 174 15% 95%;
+    --secondary-foreground: 197 40% 15%;
+
+    --muted: 174 15% 95%;
+    --muted-foreground: 197 15% 40%;
+
+    --accent: 174 45% 94%;
+    --accent-foreground: 197 84% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 197 84% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 197 84% 13%;
+
+    /* Vermelho da marca (#EE2535, cruz do ícone) */
+    --destructive: 355 86% 54%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 174 15% 88%;
+    --input: 174 15% 88%;
+    --ring: 214 62% 29%;
+
+    /* Teal da marca (#66CEC3) — ícone e wordmark "CL CUIDADOS" */
+    --teal: 174 51% 60%;
+    /* Azul ciano da marca (#00B8E3) — base do gradiente do ícone */
+    --cyan: 191 100% 45%;
+
+    --radius: 1.25rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgb(255 255 255 / 0.14);
+    border: 1px solid rgb(255 255 255 / 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
 }
