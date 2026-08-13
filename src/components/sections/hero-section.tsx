@@ -3,6 +3,7 @@ import { ArrowDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Parallax } from "@/components/motion/parallax";
+import { HeroVideo } from "@/components/media/hero-video";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 import { TrackedWhatsappLink } from "@/components/analytics/tracked-whatsapp-link";
@@ -23,28 +24,11 @@ export function HeroSection() {
           uma composição renderizada à parte (mesma filmagem): uma faixa
           nítida central em largura cheia com as 3 pessoas, e o resto do
           quadro preenchido com o próprio vídeo desfocado como fundo — assim
-          cobre 100% do espaço sem cortar ninguém e sem barra sólida. */}
+          cobre 100% do espaço sem cortar ninguém e sem barra sólida.
+          HeroVideo escolhe em JS qual dos dois montar — nunca os dois ao
+          mesmo tempo, pra não duplicar o download em conexão fraca. */}
       <Parallax amount={60} className="absolute inset-0 overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover lg:hidden"
-          src="/videos/hero-loop-mobile.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-        <video
-          className="absolute inset-0 hidden h-full w-full translate-y-24 origin-top scale-110 object-cover object-top lg:block"
-          src="/videos/hero-loop.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
+        <HeroVideo />
       </Parallax>
       <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/60 to-foreground/25" />
       <div
