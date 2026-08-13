@@ -14,4 +14,4 @@ A CL Cuidados assume toda a responsabilidade do cuidado — governança clínica
 
 ## Contato
 - WhatsApp e telefone: ver rodapé do site
-- Site: https://www.clcuidados.com.br
+- Site: https://site-c-lcuidados.vercel.app

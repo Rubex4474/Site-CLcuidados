@@ -11,7 +11,12 @@ export const SITE_CONFIG = {
   name: "CL Cuidados Domiciliares",
   legalName: "CL Cuidados Domiciliares", // PLACEHOLDER: razão social / CNPJ se for exibir
   shortName: "CL Cuidados",
-  url: "https://www.clcuidados.com.br", // PLACEHOLDER: domínio real
+  // PLACEHOLDER: trocar para "https://www.clcuidados.com.br" assim que
+  // esse domínio estiver comprado e apontado pra Vercel. Até lá,
+  // apontar aqui pro domínio errado quebra o og:image, o JSON-LD, o
+  // sitemap e o card de prévia de links no WhatsApp — todos leem esse
+  // valor e viram URLs que não resolvem pra nada.
+  url: "https://site-c-lcuidados.vercel.app",
   description:
     "Cuidador de idosos em Indaiatuba e região. Cuidado domiciliar de alto padrão, com equipe própria, supervisão contínua e suporte 24 horas para quem precisa de assistência contínua.",
   locale: "pt-BR",
