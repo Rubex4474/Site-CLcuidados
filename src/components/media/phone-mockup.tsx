@@ -16,12 +16,6 @@ const REVEAL_VARIANTS: Variants = {
   },
 };
 
-// Reflexo espelhado abaixo do aparelho, como numa foto de produto em estúdio.
-const BOX_REFLECT_STYLE: React.CSSProperties = {
-  WebkitBoxReflect:
-    "below 6px linear-gradient(to bottom, transparent, transparent 55%, rgba(255,255,255,0.12))",
-};
-
 // Retângulo exato da área de tela dentro de "phone-frame.png" (medido por
 // varredura de pixel na imagem 429×638) — a moldura é reta, sem
 // perspectiva/inclinação, então um inset() simples já basta. O vídeo (MP4,
@@ -64,10 +58,7 @@ export function PhoneMockup({ className }: PhoneMockupProps) {
         aria-hidden="true"
       />
 
-      <div
-        style={BOX_REFLECT_STYLE}
-        className="absolute inset-0 drop-shadow-[0_35px_45px_rgba(0,0,0,0.55)]"
-      >
+      <div className="absolute inset-0">
         {/* Vídeo (convertido do GIF original enviado pelo cliente — 15MB em
             GIF virou ~230KB em MP4 com qualidade igual). MP4 não tem canal
             alpha, então recortamos só a área da tela e deixamos a moldura
