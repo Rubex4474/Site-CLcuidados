@@ -42,6 +42,11 @@ export const faqItems: FaqItem[] = [
       "Sim. Garantimos a substituição rápida do profissional em casos de faltas, imprevistos ou incompatibilidade de perfil, sem interromper o atendimento.",
   },
   {
+    question: "O que acontece se o profissional faltar?",
+    answer:
+      "Nossa equipe faz a gestão contínua de escalas e conta com um plano de contingência ágil. Caso ocorra alguma ausência, realizamos a substituição imediata do profissional para garantir a continuidade do serviço sem prejuízo à sua rotina.",
+  },
+  {
     question: "Quais profissionais atendem pela CL Cuidados?",
     answer:
       "Contamos com cuidadores de idosos, técnicos de enfermagem, além de acompanhamento e supervisão operacional.",
