@@ -61,8 +61,8 @@ export const services: ServiceItem[] = [
     title: "Banho Agendado + Curativo",
     description:
       "Higiene assistida e curativos realizados com técnica correta, no horário combinado com a família.",
-    imageAlt: "Cuidador realizando banho assistido e curativo em ambiente residencial",
-    // PENDENTE: foto real a caminho — sem imageSrc, PlaceholderImage cobre.
+    imageAlt: "Cuidadora auxiliando idosa em banho assistido e curativo em banheiro residencial sofisticado",
+    imageSrc: "/images/services/banho-agendado-curativo.png",
   },
   {
     slug: "medicacao-a-domicilio",
@@ -70,7 +70,7 @@ export const services: ServiceItem[] = [
     title: "Medicação a Domicílio",
     description:
       "Administração e controle de medicamentos no horário certo, com registro para acompanhamento da família.",
-    imageAlt: "Cuidador organizando e administrando medicação de paciente em casa",
-    // PENDENTE: foto real a caminho — sem imageSrc, PlaceholderImage cobre.
+    imageAlt: "Cuidadora organizando e administrando medicação de idosa em ambiente residencial",
+    imageSrc: "/images/services/medicacao-a-domicilio.png",
   },
 ];
