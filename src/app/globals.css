@@ -65,9 +65,16 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Alguns elementos decorativos (ex.: o brilho atrás do mockup do
+       celular) usam inset negativo pra sangrar um pouco além do próprio
+       container — sem isso, essa sobra horizontal deixa a página
+       "arrastável" pros lados no mobile (rubber-band revelando espaço em
+       branco), quebrando a sensação de site sólido/firme. */
+    overflow-x: hidden;
   }
   h1,
   h2,
