@@ -32,7 +32,8 @@ export interface ServiceItem {
   title: string;
   description: string;
   imageAlt: string;
-  imageSrc: string;
+  /** Ausente até a foto real chegar — PlaceholderImage cobre esse caso. */
+  imageSrc?: string;
 }
 
 export interface TestimonialItem {

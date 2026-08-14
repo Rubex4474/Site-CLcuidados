@@ -55,4 +55,22 @@ export const services: ServiceItem[] = [
     imageAlt: "Família e cuidador reunidos em ambiente residencial sofisticado durante assistência permanente",
     imageSrc: "/images/services/assistencia-permanente.png",
   },
+  {
+    slug: "banho-agendado-curativo",
+    icon: "Bath",
+    title: "Banho Agendado + Curativo",
+    description:
+      "Higiene assistida e curativos realizados com técnica correta, no horário combinado com a família.",
+    imageAlt: "Cuidador realizando banho assistido e curativo em ambiente residencial",
+    // PENDENTE: foto real a caminho — sem imageSrc, PlaceholderImage cobre.
+  },
+  {
+    slug: "medicacao-a-domicilio",
+    icon: "Pill",
+    title: "Medicação a Domicílio",
+    description:
+      "Administração e controle de medicamentos no horário certo, com registro para acompanhamento da família.",
+    imageAlt: "Cuidador organizando e administrando medicação de paciente em casa",
+    // PENDENTE: foto real a caminho — sem imageSrc, PlaceholderImage cobre.
+  },
 ];
