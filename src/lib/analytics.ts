@@ -17,15 +17,16 @@ export function trackEvent(eventName: string, params?: Record<string, unknown>):
 }
 
 /**
- * "whatsapp_formulario" já existia e continua disparando a cada envio do
- * mini formulário. "generate_lead" é o evento GA4 padrão (nome reconhecido
- * pelo Google, facilita importar como conversão no Ads) — os dois disparam
- * juntos no mesmo submit, nunca na abertura do modal. Todo botão de
- * WhatsApp do site agora passa por esse formulário (não existe mais link
- * direto pra wa.me em lugar nenhum), então "whatsapp_direto" — usado só
- * pelos antigos links diretos — não dispara mais e foi removido.
+ * "generate_lead" é o único evento de conversão disparado no envio do
+ * formulário (nome padrão do GA4, reconhecido pra importar como conversão
+ * no Ads). Existiam mais dois eventos aqui — "whatsapp_direto" (removido
+ * quando os links diretos pro WhatsApp viraram esse mesmo modal) e
+ * "whatsapp_formulario" (removido a pedido do cliente pra não contar o
+ * mesmo lead duas vezes) — ambos estavam marcados como Evento-chave no
+ * GA4 Admin; ao removê-los daqui eles páram de receber dado, então esses
+ * dois eventos-chave também precisam ser desmarcados/substituídos por
+ * generate_lead lá no GA4.
  */
 export const ANALYTICS_EVENTS = {
-  whatsappForm: "whatsapp_formulario",
   generateLead: "generate_lead",
 } as const;

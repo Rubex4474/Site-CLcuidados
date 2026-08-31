@@ -29,7 +29,6 @@ export function WhatsappLeadForm({ onSubmitted, origin, context, phoneNumber }: 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const message = buildLeadMessage({ name, phone, relation: relation || undefined, context });
-    trackEvent(ANALYTICS_EVENTS.whatsappForm, { relation: relation || undefined, origin });
     trackEvent(ANALYTICS_EVENTS.generateLead, { origem_botao: origin, metodo_contato: "whatsapp" });
     window.open(buildWhatsappLink(message, phoneNumber), "_blank", "noopener,noreferrer");
     onSubmitted?.();
