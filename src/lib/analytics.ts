@@ -17,12 +17,15 @@ export function trackEvent(eventName: string, params?: Record<string, unknown>):
 }
 
 /**
- * Nomes de evento usados para diferenciar, no Google Ads/GA4, o lead que
- * clica direto num botão de WhatsApp do lead que passa pelo mini
- * formulário "Solicitar Avaliação" antes de ir pro WhatsApp — pedido
- * explícito do cliente para separar os dois tipos de conversão.
+ * "whatsapp_formulario" já existia e continua disparando a cada envio do
+ * mini formulário. "generate_lead" é o evento GA4 padrão (nome reconhecido
+ * pelo Google, facilita importar como conversão no Ads) — os dois disparam
+ * juntos no mesmo submit, nunca na abertura do modal. Todo botão de
+ * WhatsApp do site agora passa por esse formulário (não existe mais link
+ * direto pra wa.me em lugar nenhum), então "whatsapp_direto" — usado só
+ * pelos antigos links diretos — não dispara mais e foi removido.
  */
 export const ANALYTICS_EVENTS = {
-  whatsappDirect: "whatsapp_direto",
   whatsappForm: "whatsapp_formulario",
+  generateLead: "generate_lead",
 } as const;

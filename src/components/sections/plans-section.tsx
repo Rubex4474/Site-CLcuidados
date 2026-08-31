@@ -7,11 +7,9 @@ import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { PlaceholderImage } from "@/components/media/placeholder-image";
 import { plans } from "@/content/plans";
-import { buildServiceInquiryMessage, buildWhatsappLink } from "@/lib/whatsapp";
-import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { PAYMENT_METHODS, SITE_FLAGS } from "@/lib/seo/site-config";
 import { cn } from "@/lib/utils";
-import { TrackedWhatsappLink } from "@/components/analytics/tracked-whatsapp-link";
+import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 
 export function PlansSection() {
   return (
@@ -111,17 +109,15 @@ export function PlansSection() {
                     Suporte 24h incluso
                   </div>
 
-                  <Button asChild size="sm" variant="outline">
-                    <TrackedWhatsappLink
-                      href={buildWhatsappLink(buildServiceInquiryMessage(`plano ${plan.name}`))}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      eventName={ANALYTICS_EVENTS.whatsappDirect}
-                      eventParams={{ location: "plans", plan: plan.slug }}
-                    >
-                      Falar sobre este plano
-                    </TrackedWhatsappLink>
-                  </Button>
+                  <LeadFormDialog
+                    origin={`plano_${plan.slug.replace(/-/g, "_")}`}
+                    context={`o plano ${plan.name}`}
+                    trigger={
+                      <Button size="sm" variant="outline">
+                        Falar sobre este plano
+                      </Button>
+                    }
+                  />
                 </div>
               </div>
             </StaggerItem>

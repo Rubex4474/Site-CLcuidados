@@ -6,8 +6,6 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { buildWhatsappLink, GENERIC_WHATSAPP_MESSAGE } from "@/lib/whatsapp";
-import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 import { SITE_CONFIG } from "@/lib/seo/site-config";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -68,17 +66,19 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Button asChild variant="outline" size="sm">
-            <a
-              href={buildWhatsappLink(GENERIC_WHATSAPP_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent(ANALYTICS_EVENTS.whatsappDirect, { location: "header_desktop" })}
-            >
-              Falar pelo WhatsApp
-            </a>
-          </Button>
-          <LeadFormDialog trigger={<Button size="sm">Solicitar Avaliação</Button>} />
+          <LeadFormDialog
+            origin="header_desktop_falar_whatsapp"
+            context="os serviços de cuidado domiciliar"
+            trigger={
+              <Button variant="outline" size="sm">
+                Falar pelo WhatsApp
+              </Button>
+            }
+          />
+          <LeadFormDialog
+            origin="header_desktop_solicitar_avaliacao"
+            trigger={<Button size="sm">Solicitar Avaliação</Button>}
+          />
         </div>
 
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -98,17 +98,15 @@ export function SiteHeader() {
               ))}
             </nav>
             <div className="mt-auto flex flex-col gap-3">
-              <Button asChild variant="outline">
-                <a
-                  href={buildWhatsappLink(GENERIC_WHATSAPP_MESSAGE)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent(ANALYTICS_EVENTS.whatsappDirect, { location: "header_mobile" })}
-                >
-                  Falar pelo WhatsApp
-                </a>
-              </Button>
-              <LeadFormDialog trigger={<Button>Solicitar Avaliação</Button>} />
+              <LeadFormDialog
+                origin="header_mobile_falar_whatsapp"
+                context="os serviços de cuidado domiciliar"
+                trigger={<Button variant="outline">Falar pelo WhatsApp</Button>}
+              />
+              <LeadFormDialog
+                origin="header_mobile_solicitar_avaliacao"
+                trigger={<Button>Solicitar Avaliação</Button>}
+              />
             </div>
           </SheetContent>
         </Sheet>

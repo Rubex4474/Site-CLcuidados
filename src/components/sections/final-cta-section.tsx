@@ -32,7 +32,7 @@ export function FinalCtaSection() {
             Fale com a CL Cuidados e descubra como assumimos toda a gestão do cuidado para que
             sua família volte a ser, simplesmente, família.
           </p>
-          <LeadFormDialog trigger={<Button size="lg">Solicitar Avaliação</Button>} />
+          <LeadFormDialog origin="cta_final" trigger={<Button size="lg">Solicitar Avaliação</Button>} />
         </FadeIn>
       </div>
     </section>

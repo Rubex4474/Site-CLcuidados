@@ -6,9 +6,6 @@ import { Parallax } from "@/components/motion/parallax";
 import { HeroVideo } from "@/components/media/hero-video";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
-import { TrackedWhatsappLink } from "@/components/analytics/tracked-whatsapp-link";
-import { ANALYTICS_EVENTS } from "@/lib/analytics";
-import { buildWhatsappLink, HERO_WHATSAPP_MESSAGE } from "@/lib/whatsapp";
 import { heroStats } from "@/content/hero";
 import { getIcon } from "@/components/icon-map";
 
@@ -57,18 +54,19 @@ export function HeroSection() {
             </p>
           </StaggerItem>
           <StaggerItem className="flex flex-col gap-3 sm:flex-row">
-            <LeadFormDialog trigger={<Button size="lg">Solicitar Avaliação</Button>} />
-            <Button asChild variant="outline-inverse" size="lg">
-              <TrackedWhatsappLink
-                href={buildWhatsappLink(HERO_WHATSAPP_MESSAGE)}
-                target="_blank"
-                rel="noopener noreferrer"
-                eventName={ANALYTICS_EVENTS.whatsappDirect}
-                eventParams={{ location: "hero" }}
-              >
-                Falar pelo WhatsApp
-              </TrackedWhatsappLink>
-            </Button>
+            <LeadFormDialog
+              origin="hero_solicitar_avaliacao"
+              trigger={<Button size="lg">Solicitar Avaliação</Button>}
+            />
+            <LeadFormDialog
+              origin="hero_falar_whatsapp"
+              context="os serviços de cuidado domiciliar"
+              trigger={
+                <Button variant="outline-inverse" size="lg">
+                  Falar pelo WhatsApp
+                </Button>
+              }
+            />
           </StaggerItem>
         </StaggerGroup>
 

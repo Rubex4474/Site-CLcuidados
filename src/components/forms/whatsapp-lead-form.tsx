@@ -10,18 +10,28 @@ import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 interface WhatsappLeadFormProps {
   onSubmitted?: () => void;
+  /** Qual botão abriu o modal (ex.: "plano_gold_24h", "footer_primario") —
+   * vira o parâmetro origem_botao do evento generate_lead. */
+  origin: string;
+  /** Complemento pra frase de abertura da mensagem, ex.: "o plano Gold
+   * 24h" — repassado direto pra buildLeadMessage. */
+  context?: string;
+  /** Sobrescreve o número padrão (usado no botão de WhatsApp secundário
+   * do rodapé). */
+  phoneNumber?: string;
 }
 
-export function WhatsappLeadForm({ onSubmitted }: WhatsappLeadFormProps) {
+export function WhatsappLeadForm({ onSubmitted, origin, context, phoneNumber }: WhatsappLeadFormProps) {
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [relation, setRelation] = React.useState("");
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const message = buildLeadMessage({ name, phone, relation: relation || undefined });
-    trackEvent(ANALYTICS_EVENTS.whatsappForm, { relation: relation || undefined });
-    window.open(buildWhatsappLink(message), "_blank", "noopener,noreferrer");
+    const message = buildLeadMessage({ name, phone, relation: relation || undefined, context });
+    trackEvent(ANALYTICS_EVENTS.whatsappForm, { relation: relation || undefined, origin });
+    trackEvent(ANALYTICS_EVENTS.generateLead, { origem_botao: origin, metodo_contato: "whatsapp" });
+    window.open(buildWhatsappLink(message, phoneNumber), "_blank", "noopener,noreferrer");
     onSubmitted?.();
   }
 

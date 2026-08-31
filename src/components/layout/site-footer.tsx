@@ -3,10 +3,8 @@ import Link from "next/link";
 import { AtSign, Clock, Mail, MapPin, MessageCircle } from "lucide-react";
 
 import { ADDRESS, BUSINESS_HOURS, CONTACT, SITE_CONFIG } from "@/lib/seo/site-config";
-import { buildWhatsappLink, GENERIC_WHATSAPP_MESSAGE } from "@/lib/whatsapp";
-import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
-import { TrackedWhatsappLink } from "@/components/analytics/tracked-whatsapp-link";
+import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 
 export function SiteFooter() {
   return (
@@ -37,28 +35,33 @@ export function SiteFooter() {
           <span className="text-xs font-semibold uppercase tracking-widest2 text-teal">
             Contato
           </span>
-          <TrackedWhatsappLink
-            href={buildWhatsappLink(GENERIC_WHATSAPP_MESSAGE)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-colors hover:text-background"
-            eventName={ANALYTICS_EVENTS.whatsappDirect}
-            eventParams={{ location: "footer_primary" }}
-          >
-            <MessageCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-            {CONTACT.phoneDisplay}
-          </TrackedWhatsappLink>
-          <TrackedWhatsappLink
-            href={buildWhatsappLink(GENERIC_WHATSAPP_MESSAGE, CONTACT.whatsappNumberSecondary)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-colors hover:text-background"
-            eventName={ANALYTICS_EVENTS.whatsappDirect}
-            eventParams={{ location: "footer_secondary" }}
-          >
-            <MessageCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-            {CONTACT.phoneDisplaySecondary}
-          </TrackedWhatsappLink>
+          <LeadFormDialog
+            origin="footer_primario"
+            context="os serviços de cuidado domiciliar"
+            trigger={
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-background"
+              >
+                <MessageCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                {CONTACT.phoneDisplay}
+              </button>
+            }
+          />
+          <LeadFormDialog
+            origin="footer_secundario"
+            context="os serviços de cuidado domiciliar"
+            phoneNumber={CONTACT.whatsappNumberSecondary}
+            trigger={
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-background"
+              >
+                <MessageCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                {CONTACT.phoneDisplaySecondary}
+              </button>
+            }
+          />
           <a
             href={`mailto:${CONTACT.email}`}
             className="flex items-center gap-2 transition-colors hover:text-background"
