@@ -23,6 +23,11 @@ interface LeadEventInput {
   eventSourceUrl: string;
   clientIp: string | null;
   clientUserAgent: string | null;
+  /** Código da aba "Eventos de teste" do Events Manager (ex.: "TEST69452")
+   * — só presente quando o site é aberto com "?fbtest=CODE" na URL. Faz o
+   * evento aparecer ao vivo nessa aba em vez do fluxo normal, sem afetar
+   * envios reais. */
+  testEventCode?: string;
 }
 
 /**
@@ -55,6 +60,7 @@ export async function sendMetaLeadEvent(input: LeadEventInput): Promise<void> {
         },
       },
     ],
+    ...(input.testEventCode ? { test_event_code: input.testEventCode } : {}),
   };
 
   try {

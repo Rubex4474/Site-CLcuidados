@@ -30,13 +30,17 @@ export function WhatsappLeadForm({ onSubmitted, origin, context, phoneNumber }: 
     event.preventDefault();
     const message = buildLeadMessage({ name, phone, relation: relation || undefined, context });
     trackEvent(ANALYTICS_EVENTS.generateLead, { origem_botao: origin, metodo_contato: "whatsapp" });
+    // "?fbtest=CODE" na URL faz o evento aparecer ao vivo na aba "Eventos
+    // de teste" do Events Manager, pra validar a integração sem sujar os
+    // dados reais — ausente na navegação normal, não faz nada.
+    const testEventCode = new URLSearchParams(window.location.search).get("fbtest") ?? undefined;
     // keepalive: a navegação pro WhatsApp logo abaixo não pode cancelar
     // essa requisição em voo. Sem token configurado, a rota não faz nada
     // (ver lib/meta-capi.ts) — por isso não trava nem precisa de retry.
     fetch("/api/meta-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone, origin }),
+      body: JSON.stringify({ phone, origin, testEventCode }),
       keepalive: true,
     }).catch(() => {});
     window.open(buildWhatsappLink(message, phoneNumber), "_blank", "noopener,noreferrer");

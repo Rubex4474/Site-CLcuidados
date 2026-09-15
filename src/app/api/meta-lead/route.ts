@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   const phone = typeof body?.phone === "string" ? body.phone : null;
   const origin = typeof body?.origin === "string" ? body.origin : null;
+  const testEventCode = typeof body?.testEventCode === "string" ? body.testEventCode : undefined;
 
   if (!phone || !origin) {
     return NextResponse.json({ error: "phone e origin são obrigatórios" }, { status: 400 });
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
   await sendMetaLeadEvent({
     phone,
     origin,
+    testEventCode,
     eventSourceUrl: SITE_CONFIG.url,
     clientIp: request.headers.get("x-forwarded-for"),
     clientUserAgent: request.headers.get("user-agent"),
