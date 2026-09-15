@@ -6,6 +6,7 @@ import { SITE_CONFIG } from "@/lib/seo/site-config";
 import { SkipLink } from "@/components/layout/skip-link";
 import { WhatsappFloatButton } from "@/components/layout/whatsapp-float-button";
 import { GoogleTag } from "@/components/analytics/google-tag";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
 import "@/app/globals.css";
 
 // TEMP DEBUG: investigando o bug do navegador embutido do WhatsApp em
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {WHATSAPP_DEBUG_SCRIPT}
         </Script>
         <GoogleTag />
+        <MetaPixel />
         <SkipLink />
         {children}
         <WhatsappFloatButton />

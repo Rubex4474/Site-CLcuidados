@@ -30,6 +30,15 @@ export function WhatsappLeadForm({ onSubmitted, origin, context, phoneNumber }: 
     event.preventDefault();
     const message = buildLeadMessage({ name, phone, relation: relation || undefined, context });
     trackEvent(ANALYTICS_EVENTS.generateLead, { origem_botao: origin, metodo_contato: "whatsapp" });
+    // keepalive: a navegação pro WhatsApp logo abaixo não pode cancelar
+    // essa requisição em voo. Sem token configurado, a rota não faz nada
+    // (ver lib/meta-capi.ts) — por isso não trava nem precisa de retry.
+    fetch("/api/meta-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, origin }),
+      keepalive: true,
+    }).catch(() => {});
     window.open(buildWhatsappLink(message, phoneNumber), "_blank", "noopener,noreferrer");
     onSubmitted?.();
   }
