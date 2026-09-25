@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Check } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -30,11 +29,18 @@ function PlanCard({ plan }: { plan: PlanItem }) {
       <div className="relative">
         <PlaceholderImage alt={plan.imageAlt} aspect="4/3" className="rounded-none" showLabel={false} />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-4">
-          <Image
+          {/* <img> nativa de propósito, não next/image: o selo (PNG com
+              alfa) ganhava um quadrado visível em volta ao escalar no
+              hover/toque — mesmo bug de composição do next/image sobre
+              conteúdo em camadas já visto e corrigido no mockup do
+              celular (ver components/media/phone-mockup.tsx). Os PNGs
+              já foram pré-redimensionados pra ~250KB cada (eram
+              1-1.4MB), então abrir mão da otimização automática aqui
+              não pesa no carregamento da seção. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={plan.badgeSrc}
             alt=""
-            width={260}
-            height={260}
             className="h-44 w-44 object-contain drop-shadow-[0_10px_28px_rgba(154,106,45,0.6)] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3"
           />
         </div>
