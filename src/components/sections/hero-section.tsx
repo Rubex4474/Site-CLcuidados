@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -5,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Parallax } from "@/components/motion/parallax";
 import { HeroVideo } from "@/components/media/hero-video";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
-import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
 import { heroStats } from "@/content/hero";
 import { getIcon } from "@/components/icon-map";
 
@@ -54,19 +54,16 @@ export function HeroSection() {
             </p>
           </StaggerItem>
           <StaggerItem className="flex flex-col gap-3 sm:flex-row">
-            <LeadFormDialog
-              origin="hero_solicitar_avaliacao"
-              trigger={<Button size="lg">Solicitar Avaliação</Button>}
-            />
-            <LeadFormDialog
-              origin="hero_falar_whatsapp"
-              context="os serviços de cuidado domiciliar"
-              trigger={
-                <Button variant="outline-inverse" size="lg">
-                  Falar pelo WhatsApp
-                </Button>
-              }
-            />
+            {/* Pedido do cliente: no hero, um único CTA "Ver Planos" que
+                rola até #planos, em vez dos dois botões antigos que já
+                abriam o modal de WhatsApp direto — a ideia é a pessoa
+                conhecer os planos antes de decidir falar com a equipe.
+                Os outros pontos de contato do site (header, planos, CTA
+                final, rodapé, botão flutuante) continuam abrindo o modal
+                normalmente, sem mudança. */}
+            <Button asChild size="lg">
+              <Link href="/#planos">Ver Planos</Link>
+            </Button>
           </StaggerItem>
         </StaggerGroup>
 
