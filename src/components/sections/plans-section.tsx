@@ -5,11 +5,99 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { PlaceholderImage } from "@/components/media/placeholder-image";
 import { plans } from "@/content/plans";
 import { PAYMENT_METHODS, SITE_FLAGS } from "@/lib/seo/site-config";
 import { cn } from "@/lib/utils";
 import { LeadFormDialog } from "@/components/forms/lead-form-dialog";
+import type { PlanItem } from "@/types/content";
+
+function PlanCard({ plan }: { plan: PlanItem }) {
+  return (
+    <div
+      className={cn(
+        "group flex h-full flex-col overflow-hidden rounded-lg border shadow-card transition-shadow hover:shadow-card-hover",
+        plan.featured ? "border-teal bg-teal text-petrol" : "border-border bg-white",
+      )}
+    >
+      <div className="relative">
+        <PlaceholderImage alt={plan.imageAlt} aspect="4/3" className="rounded-none" showLabel={false} />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-4">
+          <Image
+            src={plan.badgeSrc}
+            alt=""
+            width={260}
+            height={260}
+            className="h-44 w-44 object-contain drop-shadow-[0_10px_28px_rgba(154,106,45,0.6)] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3"
+          />
+        </div>
+        {plan.featured && (
+          <Badge variant="inverse" className="absolute right-4 top-4 bg-teal text-petrol shadow-subtle">
+            Mais completo
+          </Badge>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-6">
+        <span
+          className={cn(
+            "text-xs font-semibold uppercase tracking-widest2",
+            plan.featured ? "text-petrol/70" : "text-primary",
+          )}
+        >
+          {plan.cadence}
+        </span>
+
+        <h3 className="font-display text-xl">{plan.name}</h3>
+
+        {SITE_FLAGS.showPricing && (
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-display text-2xl">{plan.price}</span>
+            <span className={cn("text-xs", plan.featured ? "text-petrol/70" : "text-muted-foreground")}>
+              {plan.priceSuffix}
+            </span>
+          </div>
+        )}
+
+        <p
+          className={cn(
+            "flex-1 text-sm leading-relaxed",
+            plan.featured ? "text-petrol/80" : "text-muted-foreground",
+          )}
+        >
+          {plan.description}
+        </p>
+
+        <div
+          className={cn(
+            "flex items-center gap-2 text-xs font-medium",
+            plan.featured ? "text-petrol/90" : "text-primary",
+          )}
+        >
+          <Check className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+          Suporte 24h incluso
+        </div>
+
+        <LeadFormDialog
+          origin={`plano_${plan.slug.replace(/-/g, "_")}`}
+          context={`o plano ${plan.name}`}
+          trigger={
+            <Button size="sm" variant="outline">
+              Falar sobre este plano
+            </Button>
+          }
+        />
+      </div>
+    </div>
+  );
+}
 
 export function PlansSection() {
   return (
@@ -26,100 +114,31 @@ export function PlansSection() {
           </p>
         </FadeIn>
 
-        <StaggerGroup
-          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-          stagger={0.08}
-        >
+        {/* Mobile: carrossel horizontal arrastável (pedido do cliente — antes
+            era uma pilha vertical, exigia rolar a página inteira pra ver os
+            4 planos). basis-[85%] deixa uma fatia do próximo card visível
+            na borda, como dica visual de que dá pra arrastar. Escondido a
+            partir de sm: a partir dali a grade normal assume. */}
+        <div className="mt-16 sm:hidden">
+          <Carousel opts={{ align: "start" }} aria-label="Planos disponíveis">
+            <CarouselContent>
+              {plans.map((plan) => (
+                <CarouselItem key={plan.slug} className="basis-[85%]">
+                  <PlanCard plan={plan} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+
+        {/* sm+: grade estática de sempre, sem carrossel — já cabe 2-4 por
+            linha sem precisar arrastar. */}
+        <StaggerGroup className="mt-16 hidden gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
           {plans.map((plan) => (
             <StaggerItem key={plan.slug}>
-              <div
-                className={cn(
-                  "group flex h-full flex-col overflow-hidden rounded-lg border shadow-card transition-shadow hover:shadow-card-hover",
-                  plan.featured ? "border-teal bg-teal text-petrol" : "border-border bg-white",
-                )}
-              >
-                <div className="relative">
-                  <PlaceholderImage
-                    alt={plan.imageAlt}
-                    aspect="4/3"
-                    className="rounded-none"
-                    showLabel={false}
-                  />
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-4">
-                    <Image
-                      src={plan.badgeSrc}
-                      alt=""
-                      width={260}
-                      height={260}
-                      className="h-44 w-44 object-contain drop-shadow-[0_10px_28px_rgba(154,106,45,0.6)] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3"
-                    />
-                  </div>
-                  {plan.featured && (
-                    <Badge
-                      variant="inverse"
-                      className="absolute right-4 top-4 bg-teal text-petrol shadow-subtle"
-                    >
-                      Mais completo
-                    </Badge>
-                  )}
-                </div>
-
-                <div className="flex flex-1 flex-col gap-4 p-6">
-                  <span
-                    className={cn(
-                      "text-xs font-semibold uppercase tracking-widest2",
-                      plan.featured ? "text-petrol/70" : "text-primary",
-                    )}
-                  >
-                    {plan.cadence}
-                  </span>
-
-                  <h3 className="font-display text-xl">{plan.name}</h3>
-
-                  {SITE_FLAGS.showPricing && (
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="font-display text-2xl">{plan.price}</span>
-                      <span
-                        className={cn(
-                          "text-xs",
-                          plan.featured ? "text-petrol/70" : "text-muted-foreground",
-                        )}
-                      >
-                        {plan.priceSuffix}
-                      </span>
-                    </div>
-                  )}
-
-                  <p
-                    className={cn(
-                      "flex-1 text-sm leading-relaxed",
-                      plan.featured ? "text-petrol/80" : "text-muted-foreground",
-                    )}
-                  >
-                    {plan.description}
-                  </p>
-
-                  <div
-                    className={cn(
-                      "flex items-center gap-2 text-xs font-medium",
-                      plan.featured ? "text-petrol/90" : "text-primary",
-                    )}
-                  >
-                    <Check className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
-                    Suporte 24h incluso
-                  </div>
-
-                  <LeadFormDialog
-                    origin={`plano_${plan.slug.replace(/-/g, "_")}`}
-                    context={`o plano ${plan.name}`}
-                    trigger={
-                      <Button size="sm" variant="outline">
-                        Falar sobre este plano
-                      </Button>
-                    }
-                  />
-                </div>
-              </div>
+              <PlanCard plan={plan} />
             </StaggerItem>
           ))}
         </StaggerGroup>
