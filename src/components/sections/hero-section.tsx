@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -60,9 +59,16 @@ export function HeroSection() {
                 conhecer os planos antes de decidir falar com a equipe.
                 Os outros pontos de contato do site (header, planos, CTA
                 final, rodapé, botão flutuante) continuam abrindo o modal
-                normalmente, sem mudança. */}
+                normalmente, sem mudança.
+                <a> comum de propósito, não next/link: o Hero só existe
+                em "/", então nunca precisa navegar de outra rota — e o
+                Link do Next não dispara o scroll quando o clique
+                acontece na MESMA página em que a âncora já está (só
+                funciona vindo de outra rota), que era exatamente por
+                que o botão não rolava até a seção. <a href="#planos">
+                usa o comportamento nativo do navegador, que sempre rola. */}
             <Button asChild size="lg">
-              <Link href="/#planos">Ver Planos</Link>
+              <a href="#planos">Ver Planos</a>
             </Button>
           </StaggerItem>
         </StaggerGroup>
