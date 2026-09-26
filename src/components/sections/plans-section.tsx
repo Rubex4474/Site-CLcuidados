@@ -63,14 +63,24 @@ function PlanCard({ plan }: { plan: PlanItem }) {
 
         <h3 className="font-display text-xl">{plan.name}</h3>
 
-        {SITE_FLAGS.showPricing && (
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-display text-2xl">{plan.price}</span>
-            <span className={cn("text-xs", plan.featured ? "text-petrol/70" : "text-muted-foreground")}>
-              {plan.priceSuffix}
+        {SITE_FLAGS.showPricing &&
+          (plan.showStartingPrice ? (
+            <div className="flex flex-col gap-0.5">
+              <span className={cn("text-xs", plan.featured ? "text-petrol/70" : "text-muted-foreground")}>
+                A partir de
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-display text-2xl">{plan.price}</span>
+                <span className={cn("text-xs", plan.featured ? "text-petrol/70" : "text-muted-foreground")}>
+                  {plan.priceSuffix}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <span className={cn("font-display text-lg", plan.featured ? "text-petrol" : "text-foreground")}>
+              {plan.customPriceLabel}
             </span>
-          </div>
-        )}
+          ))}
 
         <p
           className={cn(

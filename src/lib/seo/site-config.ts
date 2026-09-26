@@ -79,12 +79,15 @@ export const PAYMENT_METHODS = ["Boleto", "Pix"] as const;
  * dados reais ainda não disponíveis.
  */
 export const SITE_FLAGS = {
-  // Teste A/B pedido pelo cliente: rodar uma primeira fase sem preços
-  // visíveis nos Planos (só "Falar sobre este plano") para medir a
-  // qualidade/volume dos leads, antes de decidir se exibe os valores.
+  // Resultado do teste A/B de preços: cliente decidiu mostrar só o valor
+  // de entrada (plano Bronze 6h, "A partir de R$X") como filtro de
+  // qualificação de lead — os demais planos mostram "Proposta
+  // personalizada" (ver PlanItem.showStartingPrice/customPriceLabel em
+  // content/plans.ts). Esta flag continua como kill-switch geral: false
+  // volta pro estado "sem nenhum preço visível" em qualquer plano.
   // Controla ao mesmo tempo a UI (PlansSection) e o JSON-LD — nunca deixar
   // o schema mostrar um preço que a página não mostra.
-  showPricing: false,
+  showPricing: true,
   // FAQPage: Google aposentou o rich result em 07/05/2026 — mantido por
   // custo zero e possível sinal para crawlers de IA, sem prometer SERP.
   // Uma única flag torna a remoção trivial se deixar de fazer sentido.

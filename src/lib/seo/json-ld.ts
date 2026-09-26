@@ -89,9 +89,11 @@ export function buildLocalBusinessGraph(
           description: plan.description,
           url: `${SITE_CONFIG.url}/#planos`,
           // Preço só entra no schema quando também está visível na página —
-          // ver SITE_FLAGS.showPricing (site rodando sem preço por enquanto
-          // para testar volume/qualidade de leads antes de exibi-lo).
-          ...(SITE_FLAGS.showPricing
+          // hoje só o plano de entrada (showStartingPrice) mostra valor;
+          // os demais mostram "Proposta personalizada", então ficam sem
+          // price aqui também (nunca deixar o schema prometer um número
+          // que a página não mostra).
+          ...(SITE_FLAGS.showPricing && plan.showStartingPrice
             ? { price: plan.priceValue, priceCurrency: "BRL" }
             : {}),
           itemOffered: {

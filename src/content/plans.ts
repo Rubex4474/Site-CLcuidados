@@ -11,6 +11,10 @@ export const plans: PlanItem[] = [
     description: "Seis horas diárias de cuidado, com toda a supervisão e gestão da CL.",
     imageAlt: "Cuidador acompanhando idoso durante o período diurno em casa",
     badgeSrc: "/images/plans/badge-bronze.png",
+    // Único plano com valor visível — pedido do cliente: filtra o lead
+    // logo na página, sem gastar tempo do time com quem não topa nem a
+    // entrada.
+    showStartingPrice: true,
   },
   {
     slug: "bronze-8h",
@@ -22,6 +26,7 @@ export const plans: PlanItem[] = [
     description: "Oito horas diárias de cuidado, com toda a supervisão e gestão da CL.",
     imageAlt: "Cuidador auxiliando idoso em atividades diárias com atenção",
     badgeSrc: "/images/plans/badge-bronze.png",
+    customPriceLabel: "Proposta personalizada",
   },
   {
     slug: "silver-12h",
@@ -33,6 +38,7 @@ export const plans: PlanItem[] = [
     description: "Doze horas diárias de cuidado contínuo, todos os dias da semana.",
     imageAlt: "Cuidador oferecendo suporte contínuo a idoso ao longo do dia",
     badgeSrc: "/images/plans/badge-prata.png",
+    customPriceLabel: "Proposta personalizada",
   },
   {
     slug: "gold-24h",
@@ -45,5 +51,6 @@ export const plans: PlanItem[] = [
     imageAlt: "Equipe de cuidadores garantindo cobertura 24 horas para o paciente",
     featured: true,
     badgeSrc: "/images/plans/badge-ouro.png",
+    customPriceLabel: "Proposta personalizada",
   },
 ];

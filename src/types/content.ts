@@ -77,6 +77,14 @@ export interface PlanItem {
   featured?: boolean;
   /** Selo do nível do plano (bronze/prata/ouro), exibido sobre a imagem. */
   badgeSrc: string;
+  /** true só no plano de entrada — mostra "A partir de {price}" na UI e
+   * no JSON-LD (quando SITE_FLAGS.showPricing também está ligado). Serve
+   * de filtro de qualificação: quem não topa nem o valor de entrada não
+   * chega a conversar com a equipe. */
+  showStartingPrice?: boolean;
+  /** Texto exibido no lugar do preço nos planos sem showStartingPrice,
+   * ex.: "Proposta personalizada". */
+  customPriceLabel?: string;
 }
 
 export interface PartnerItem {
