@@ -38,17 +38,21 @@ export function HeroSection() {
 
       <div className="container relative z-10 flex min-w-0 flex-col gap-10 pb-24 pt-40 lg:pb-28">
         <StaggerGroup className="flex max-w-3xl flex-col gap-6" stagger={0.14}>
-          <StaggerItem className="flex flex-wrap items-center gap-3">
+          <StaggerItem>
             <Badge variant="inverse">Cuidador de idosos em Indaiatuba e região</Badge>
-            {/* Pedido do cliente: prova social em destaque logo no início
-                do site — "mais de 60 famílias atendidas" pra mostrar que
-                já são uma operação estabelecida, não recém-criada. Cor
-                teal (diferente do badge ao lado) pra chamar mais atenção
-                e não se misturar com o eyebrow de localização. */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 backdrop-blur-sm">
-              <Users className="h-4 w-4 shrink-0 text-teal" strokeWidth={2} />
-              <span className="text-sm font-semibold text-white">
-                Mais de <span className="text-teal">60 famílias</span> atendidas
+          </StaggerItem>
+          {/* Pedido do cliente: prova social em destaque logo no início do
+              site — "mais de 60 famílias atendidas" pra mostrar que já são
+              uma operação estabelecida, não recém-criada. Linha própria
+              (não dividindo espaço com o badge de localização) e fundo
+              sólido teal (não translúcido) pra garantir contraste forte
+              contra o vídeo escuro do fundo — primeira versão ficou
+              discreta demais. */}
+          <StaggerItem>
+            <div className="inline-flex items-center gap-2.5 rounded-full bg-teal px-5 py-2.5 shadow-lg shadow-teal/30">
+              <Users className="h-5 w-5 shrink-0 text-petrol" strokeWidth={2.5} />
+              <span className="text-base font-bold text-petrol sm:text-lg">
+                Mais de 60 famílias atendidas
               </span>
             </div>
           </StaggerItem>
