@@ -27,7 +27,7 @@ export function AnimatedCounter({
   className,
   prefix = "",
   suffix = "",
-  duration = 1.6,
+  duration = 2.5,
   decimals = 0,
 }: AnimatedCounterProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
@@ -37,9 +37,14 @@ export function AnimatedCounter({
 
   React.useEffect(() => {
     if (!isInView || prefersReducedMotion) return;
+    // "linear" de propósito, não "easeOut": o easing original concentrava
+    // quase toda a subida no primeiro instante e só "arrastava" o final,
+    // então pra números pequenos (3, 60, 5.0) parecia já abrir no valor
+    // final em vez de contar — cliente pediu pra dar pra acompanhar a
+    // contagem. Linear mantém o ritmo constante do início ao fim.
     const controls = animate(0, value, {
       duration,
-      ease: "easeOut",
+      ease: "linear",
       onUpdate(latest) {
         setDisplayValue(latest);
       },
