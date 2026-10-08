@@ -12,6 +12,8 @@ interface AnimatedCounterProps {
   prefix?: string;
   suffix?: string;
   duration?: number;
+  /** Casas decimais fixas, ex.: decimals={1} pra uma nota tipo "5.0". */
+  decimals?: number;
 }
 
 /**
@@ -26,6 +28,7 @@ export function AnimatedCounter({
   prefix = "",
   suffix = "",
   duration = 1.6,
+  decimals = 0,
 }: AnimatedCounterProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -38,7 +41,7 @@ export function AnimatedCounter({
       duration,
       ease: "easeOut",
       onUpdate(latest) {
-        setDisplayValue(Math.round(latest));
+        setDisplayValue(latest);
       },
     });
     return () => controls.stop();
@@ -47,7 +50,7 @@ export function AnimatedCounter({
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {displayValue}
+      {displayValue.toFixed(decimals)}
       {suffix}
     </span>
   );

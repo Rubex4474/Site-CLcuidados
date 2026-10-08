@@ -1,9 +1,8 @@
-import { ArrowDown, Users } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Parallax } from "@/components/motion/parallax";
-import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { HeroVideo } from "@/components/media/hero-video";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { heroStats } from "@/content/hero";
@@ -42,22 +41,12 @@ export function HeroSection() {
           <StaggerItem>
             <Badge variant="inverse">Cuidador de idosos em Indaiatuba e região</Badge>
           </StaggerItem>
-          {/* Pedido do cliente: prova social em destaque logo no início do
-              site — "mais de 60 famílias atendidas" pra mostrar que já são
-              uma operação estabelecida, não recém-criada. Linha própria
-              (não dividindo espaço com o badge de localização) e fundo
-              sólido teal (não translúcido) pra garantir contraste forte
-              contra o vídeo escuro do fundo — primeira versão ficou
-              discreta demais. O número conta de 0 até 60 ao entrar na
-              tela (referência que o cliente mandou de outro site). */}
-          <StaggerItem>
-            <div className="inline-flex items-center gap-2.5 rounded-full bg-teal px-5 py-2.5 shadow-lg shadow-teal/30">
-              <Users className="h-5 w-5 shrink-0 text-petrol" strokeWidth={2.5} />
-              <span className="text-base font-bold text-petrol sm:text-lg">
-                Mais de <AnimatedCounter value={60} /> famílias atendidas
-              </span>
-            </div>
-          </StaggerItem>
+          {/* A prova social "mais de 60 famílias" morava aqui como badge
+              avulso — removida porque agora vive na StatsBandSection logo
+              abaixo do Hero (junto com anos de mercado + nota do Google),
+              e repetir o mesmo número duas vezes em sequência ficava
+              redundante. Se o cliente preferir os dois juntos, é só
+              trazer esse badge de volta. */}
           <StaggerItem>
             <h1 className="text-balance font-display text-[2.75rem] font-medium leading-[1.05] tracking-tightest text-white sm:text-6xl lg:text-[5.5rem]">
               Você cuida do amor. Nós cuidamos de todo o resto.

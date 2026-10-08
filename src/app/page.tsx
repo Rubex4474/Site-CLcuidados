@@ -2,10 +2,12 @@ import { SITE_CONFIG, SITE_FLAGS } from "@/lib/seo/site-config";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildFaqPageSchema, buildLocalBusinessGraph } from "@/lib/seo/json-ld";
 import { getGoogleReviews } from "@/lib/google-reviews";
+import { getYearsInBusiness } from "@/lib/business-stats";
 import { faqItems } from "@/content/faq";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { HeroSection } from "@/components/sections/hero-section";
+import { StatsBandSection } from "@/components/sections/stats-band-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { EcosystemSection } from "@/components/sections/ecosystem-section";
 import { ComparisonSection } from "@/components/sections/comparison-section";
@@ -46,6 +48,7 @@ export default async function HomePage() {
       <SiteHeader />
       <main id="main-content">
         <HeroSection />
+        <StatsBandSection yearsInBusiness={getYearsInBusiness()} reviewsData={reviewsData} />
         <AboutSection />
         <EcosystemSection />
         <ComparisonSection />
