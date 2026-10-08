@@ -21,36 +21,45 @@ export function StatsBandSection({ yearsInBusiness, reviewsData }: StatsBandSect
   const statCount = reviewsData ? 3 : 2;
 
   return (
-    <section className="border-b border-border bg-white py-10 lg:py-14">
+    <section className="border-b border-border bg-white py-8 lg:py-14">
+      {/* Lado a lado mesmo no mobile (pedido do cliente — a versão anterior
+          empilhava verticalmente e ocupava altura demais rolando a página).
+          Textos/ícones menores em telas estreitas pra caber 3 colunas sem
+          quebrar feio; "divide-x" já funciona em qualquer largura, não
+          precisa mais do par divide-y/divide-x condicional por breakpoint. */}
       <div
         className={cn(
-          "container grid grid-cols-1 gap-8 divide-y divide-border sm:divide-x sm:divide-y-0",
-          statCount === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2",
+          "container grid gap-2 divide-x divide-border sm:gap-8",
+          statCount === 3 ? "grid-cols-3" : "grid-cols-2",
         )}
       >
-        <div className="flex flex-col items-center gap-1 pt-6 text-center first:pt-0 sm:pt-0">
-          <Users className="h-6 w-6 text-primary" strokeWidth={2} />
-          <span className="font-display text-4xl font-bold text-primary">
+        <div className="flex flex-col items-center gap-1 px-1 text-center sm:gap-1.5">
+          <Users className="h-4 w-4 text-primary sm:h-6 sm:w-6" strokeWidth={2} />
+          <span className="font-display text-xl font-bold text-primary sm:text-4xl">
             <AnimatedCounter value={60} prefix="+" />
           </span>
-          <span className="text-sm text-muted-foreground">Famílias atendidas</span>
+          <span className="text-[0.65rem] leading-tight text-muted-foreground sm:text-sm">
+            Famílias atendidas
+          </span>
         </div>
 
-        <div className="flex flex-col items-center gap-1 pt-6 text-center sm:pt-0">
-          <CalendarDays className="h-6 w-6 text-primary" strokeWidth={2} />
-          <span className="font-display text-4xl font-bold text-primary">
+        <div className="flex flex-col items-center gap-1 px-1 text-center sm:gap-1.5">
+          <CalendarDays className="h-4 w-4 text-primary sm:h-6 sm:w-6" strokeWidth={2} />
+          <span className="font-display text-xl font-bold text-primary sm:text-4xl">
             <AnimatedCounter value={yearsInBusiness} prefix="+" />
           </span>
-          <span className="text-sm text-muted-foreground">Anos de mercado</span>
+          <span className="text-[0.65rem] leading-tight text-muted-foreground sm:text-sm">
+            Anos de mercado
+          </span>
         </div>
 
         {reviewsData && (
-          <div className="flex flex-col items-center gap-1 pt-6 text-center sm:pt-0">
-            <Star className="h-6 w-6 text-primary" strokeWidth={2} />
-            <span className="font-display text-4xl font-bold text-primary">
+          <div className="flex flex-col items-center gap-1 px-1 text-center sm:gap-1.5">
+            <Star className="h-4 w-4 text-primary sm:h-6 sm:w-6" strokeWidth={2} />
+            <span className="font-display text-xl font-bold text-primary sm:text-4xl">
               <AnimatedCounter value={reviewsData.rating} decimals={1} />
             </span>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-[0.65rem] leading-tight text-muted-foreground sm:text-sm">
               {reviewsData.userRatingCount} avaliações no Google
             </span>
           </div>
